@@ -38,7 +38,7 @@ static const CGFloat kWindowBottomMargin = kCornerRadius + kBorderWidth + kShado
     self = [super initWithContentRect:NSZeroRect styleMask:NSWindowStyleMaskNonactivatingPanel backing:NSBackingStoreBuffered defer:NO];
     if (self) {
         [self setBackgroundColor:[NSColor clearColor]];
-        [self setOpaque:NO];
+        [self setOpaque:YES];
         [self setLevel:NSMainMenuWindowLevel];
         [self setMovableByWindowBackground:NO];
         [self setHasShadow:NO];
@@ -195,8 +195,8 @@ static const CGFloat kWindowBottomMargin = kCornerRadius + kBorderWidth + kShado
         shadow.shadowOffset = NSMakeSize(0, -kShadowWidth/2);
     }
     [shadow set];
-    [[NSColor colorWithWhite:0.3 alpha:0.4] setStroke];
-    [[NSColor whiteColor] setFill];
+    [[NSColor colorWithHue:0.666 saturation:0.113 brightness:0.141 alpha:1] setStroke];
+    [[NSColor colorWithHue:0.666 saturation:0.113 brightness:0.141 alpha:1] setFill]; //***
     [rectPath setLineWidth:2*kBorderWidth];
     [rectPath stroke];
     [rectPath fill];

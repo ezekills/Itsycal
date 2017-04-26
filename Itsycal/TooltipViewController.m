@@ -13,7 +13,7 @@
 
 - (void)toolTipForDate:(MoDate)date
 {
-    self.backgroundColor = [NSColor colorWithRed:1 green:1 blue:0.95 alpha:1];
+    self.backgroundColor = [NSColor colorWithHue:0.585 saturation:0.18 brightness:0.2 alpha:1];
     self.tv.enclosingScrollView.hasVerticalScroller = NO; // in case user has System Prefs set to always show scroller
     self.events = [self.ec eventsForDate:date];
     [self reloadData];

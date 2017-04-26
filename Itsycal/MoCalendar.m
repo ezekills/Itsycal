@@ -44,17 +44,19 @@ static NSColor *kBackgroundColor=nil, *kWeeksBackgroundColor=nil, *kDatesBackgro
     kShadow.shadowColor = [NSColor colorWithWhite:0 alpha:0.2];
     kShadow.shadowBlurRadius = 1;
     kShadow.shadowOffset = NSMakeSize(0, -1);
-    kBorderColor = [NSColor colorWithRed:0.86 green:0.86 blue:0.88 alpha:1];
-    kOutlineColor = [NSColor colorWithRed:0.7 green:0.7 blue:0.73 alpha:1];
-    kBorderColor = [NSColor colorWithWhite:0.86 alpha:1];
-    kOutlineColor = [NSColor colorWithWhite:0.76 alpha:1];
-    kLightTextColor = [NSColor colorWithWhite:0.15 alpha:0.6];
-    kDarkTextColor  = [NSColor colorWithWhite:0.15 alpha:1];
-    kHighlightedDOWTextColor = [NSColor colorWithRed:0.75 green:0.2 blue:0.1 alpha:1];
-    kBackgroundColor = [NSColor whiteColor];
-    kWeeksBackgroundColor = [NSColor colorWithWhite:0.86 alpha:1];
-    kDatesBackgroundColor = [NSColor colorWithWhite:0.95 alpha:1];
+    kBorderColor = [NSColor colorWithHue:0 saturation:0 brightness:1 alpha:1];
+    kOutlineColor = [NSColor colorWithHue:0 saturation:0 brightness:1 alpha:1];
+    kBorderColor = [NSColor colorWithHue:0.666 saturation:0.113 brightness:0.141 alpha:1];
+    kOutlineColor = [NSColor colorWithHue:0.666 saturation:0.113 brightness:0.141 alpha:1];
+    kLightTextColor = [NSColor colorWithHue:0 saturation:0 brightness:1 alpha:1];
+    kDarkTextColor  = [NSColor colorWithHue:0 saturation:0 brightness:0.9 alpha:1];
+    kHighlightedDOWTextColor = [NSColor colorWithHue:0 saturation:0 brightness:1 alpha:1];
+    kBackgroundColor = [NSColor colorWithHue:0.666 saturation:0.113 brightness:0.141 alpha:1]; //*** weekdaysbg
+    kWeeksBackgroundColor = [NSColor colorWithHue:0.666 saturation:0.113 brightness:0.141 alpha:1]; //*** weekdaysleftbg
+    kDatesBackgroundColor = [NSColor colorWithHue:0.666 saturation:0.113 brightness:0.141 alpha:1]; //*** calbg
 }
+
+//                       [NSColor colorWithHue:0.618 saturation:0.755 brightness:1 alpha:0.6]
 
 - (instancetype)initWithFrame:(NSRect)frameRect
 {
@@ -690,7 +692,7 @@ static NSColor *kBackgroundColor=nil, *kWeeksBackgroundColor=nil, *kDatesBackgro
     [outlinePath setLineWidth:2];
     [outlinePath stroke];
     
-    [[NSColor whiteColor] set];
+    [[NSColor colorWithHue:0.666 saturation:0.113 brightness:0.08 alpha:1] set]; //*** monthcolor
     [NSGraphicsContext saveGraphicsState];
     [kShadow set];
     [outlinePath fill];
@@ -699,7 +701,7 @@ static NSColor *kBackgroundColor=nil, *kWeeksBackgroundColor=nil, *kDatesBackgro
     if (self.highlightedDOWs) {
         NSRect weekendRect = [self convertRect:[_dateGrid cellsRect] fromView:_dateGrid];
         weekendRect.size.width = kMoCalCellWidth;
-        [[NSColor colorWithWhite:0.15 alpha:0.05] set];
+        [[NSColor colorWithHue:0.618 saturation:0.755 brightness:1 alpha:0.4] set]; //*** blue
         NSInteger numColsToHighlight = 0;
         for (NSInteger col = 0; col <= 7; col++) {
             if (col < 7 && [self columnIsMemberOfHighlightedDOWs:col]) {
@@ -725,7 +727,7 @@ static NSColor *kBackgroundColor=nil, *kWeeksBackgroundColor=nil, *kDatesBackgro
         [t translateXBy:NSMinX(_dateGrid.frame) yBy:0];
         NSBezierPath *highlightPath = [_highlightPath copy];
         [highlightPath transformUsingAffineTransform:t];
-        NSColor *outlineColor = [_highlightColor blendedColorWithFraction:0.6 ofColor:[NSColor blackColor]];
+        NSColor *outlineColor = [_highlightColor blendedColorWithFraction:0.6 ofColor:[NSColor colorWithHue:0 saturation:0 brightness:1 alpha:1]];
         [[outlineColor colorWithAlphaComponent:0.3] setStroke];
         [[_highlightColor colorWithAlphaComponent:0.2] setFill];
         [highlightPath stroke];
